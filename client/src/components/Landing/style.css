@@ -1,0 +1,33 @@
+.landing {
+  width: var(--container-width);
+  min-width: 200px;
+  height: 40vh;
+  margin: 5rem auto;
+  /* border: 1px solid red; */
+}
+
+.landing form {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.landing form input {
+  height: 2rem;
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  margin-top: 0.4rem;
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+
+.landing form button {
+  margin: 1rem 0;
+  margin-top: 2rem;
+  height: 2.3rem;
+  font-weight: 700;
+  color: rgb(243, 230, 230);
+  background-color: rgb(59, 173, 59);
+  border: none;
+  border-radius: 10px;
+}

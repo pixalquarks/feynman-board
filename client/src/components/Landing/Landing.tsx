@@ -1,26 +1,36 @@
-import React, { useState } from "react";
+import React, { useRef, useContext } from "react";
+import { UserContext } from "../../context/UserContext";
+import { Container, Input, Button } from "@chakra-ui/react";
 import "./style.css";
 
 const Landing: React.FC = () => {
-  const [username, setUsername] = useState("");
+  const { user, Login } = useContext(UserContext) as UserContextType;
+
+  const inputRef = useRef(null);
 
   const OnUsernameSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(username);
-    setUsername("");
+    if (inputRef.current === null) return;
+    console.log(inputRef.current.value);
+    Login(inputRef.current.value);
   };
 
   return (
-    <div>
-      <form onSubmit={OnUsernameSubmit}>
-        <input
-          type="text"
-          placeholder="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <button type="submit">Submit</button>
-      </form>
+    <div className="landing">
+      <Container>
+        <form onSubmit={OnUsernameSubmit}>
+          <label htmlFor="username">Username: </label>
+          <Input
+            ref={inputRef}
+            id="username"
+            type="text"
+            placeholder="username"
+          />
+          <Button colorScheme="green" type="submit">
+            Login
+          </Button>
+        </form>
+      </Container>
     </div>
   );
 };

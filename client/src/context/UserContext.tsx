@@ -10,6 +10,8 @@ interface Props {
 export const UserProvider: React.FC<Props> = ({ children }) => {
   const [user, setUser] = useState({});
 
+  const [topics, setTopics] = useState<Topic[]>([]);
+
   const navigate = useNavigate();
 
   const Login = (user: string) => {
@@ -18,7 +20,7 @@ export const UserProvider: React.FC<Props> = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ user, Login }}>
+    <UserContext.Provider value={{ user, Login, topics }}>
       {children}
     </UserContext.Provider>
   );

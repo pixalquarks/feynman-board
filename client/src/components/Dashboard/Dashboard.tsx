@@ -1,25 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/UserContext";
+import { Container, ListItem, UnorderedList, Button } from "@chakra-ui/react";
 import "./style.css";
 
-const topics = [
-  { name: "fdlskfjdf", understanding: 30 },
-  { name: "gflgkflgfr", understanding: 76 },
-  { name: "vvmxkvdr", understanding: 12 },
-];
-
 const Dashboard: React.FC = () => {
+  const { topics } = useContext(UserContext) as UserContextType;
+
+  const navigate = useNavigate();
   return (
     <div>
-      <button>Add Topic</button>
-      <ul>
-        {topics.map((topic, index) => {
-          return (
-            <li key={index}>
-              {topic.name}: {topic.understanding} %
-            </li>
-          );
-        })}
-      </ul>
+      <Container maxW="md">
+        <Button colorScheme="blue" onClick={() => navigate("/add-topic")}>
+          Add Topic
+        </Button>
+        <UnorderedList>
+          {topics.map((topic, index) => {
+            return (
+              <ListItem key={index}>
+                {topic.name}: {topic.understanding} %
+              </ListItem>
+            );
+          })}
+        </UnorderedList>
+      </Container>
     </div>
   );
 };

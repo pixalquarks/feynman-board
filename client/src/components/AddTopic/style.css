@@ -21,6 +21,7 @@
 .add-topic textarea {
   border-radius: 10px;
   padding: 0.5rem;
+  border: 1px solid black;
 }
 
 .topic-name {
@@ -29,4 +30,16 @@
 
 .topic-name input {
   font-size: 1.3em;
+}
+
+.block-item {
+  display: inline;
+}
+
+.block-item:hover {
+  border: 1px solid black;
+}
+
+.block-item:active {
+  border: 1px solid red;
 }
