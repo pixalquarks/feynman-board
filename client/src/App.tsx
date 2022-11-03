@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import components from "./components";
 
-const { Landing, Dashboard, AddTopic } = components;
+const { Landing, Dashboard, AddTopic, NotFound } = components;
 
 const App = () => {
   return (
@@ -11,7 +11,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/add-topic" element={<AddTopic />} />
+        <Route path="/topics" element={<AddTopic />} />
+        <Route path="/topics/:topicId" element={<AddTopic />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

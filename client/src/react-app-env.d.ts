@@ -1,7 +1,11 @@
 type UserContextType = {
     user: string
     Login : (user: string) => void
-    topics: Topic[]
+    AddTopic: (topic: Topic) => void
+    GetTopics: () => void
+    GetTopicById: (id: string) => Promise<Topic | null>
+    UpdateTopic: (topic: Topic) => Promise<void>
+    topics: CompactTopic[]
 }
 
 enum UnderstandingLevel {
@@ -18,8 +22,13 @@ type Block = {
 }
 
 type Topic = {
-    id: number;
+    _id?: string;
     name: string;
-    data: string;
     blocks: Block[];
   };
+
+type CompactTopic = {
+    _id: string;
+    name: string;
+    understanding: number;
+}
