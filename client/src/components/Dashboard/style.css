@@ -1,0 +1,35 @@
+.topic-list li {
+  list-style: none;
+  margin: 5px 0;
+}
+
+.topic-list li a:hover {
+  text-decoration: none;
+}
+
+.topic-list-item {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 8px;
+  padding: 2px 4px;
+}
+
+.topic-list-item:hover {
+  background-color: #cfc0c0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: font-size 0.2s;
+  transition: font-weight 0.2s;
+}
+
+.topic-name {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.topic-header {
+  width: 100%;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: left;
+}

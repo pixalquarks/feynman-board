@@ -1,30 +1,61 @@
-import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { useNavigate, Link as ReactLink } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
-import { Container, ListItem, UnorderedList, Button } from "@chakra-ui/react";
+import {
+  Container,
+  ListItem,
+  UnorderedList,
+  Button,
+  Link,
+  Flex,
+} from "@chakra-ui/react";
 import "./style.css";
 
 const Dashboard: React.FC = () => {
-  const { topics } = useContext(UserContext) as UserContextType;
+  const { topics, GetTopics } = useContext(UserContext) as UserContextType;
+
+  useEffect(() => {
+    GetTopics();
+  }, []);
 
   const navigate = useNavigate();
   return (
-    <div>
-      <Container maxW="md">
-        <Button colorScheme="blue" onClick={() => navigate("/add-topic")}>
+    <Flex
+      maxW="md"
+      direction="column"
+      align="center"
+      justify="space-between"
+      marginTop="2rem"
+    >
+      <Link
+        as={ReactLink}
+        to="/topics"
+        width="100%"
+        marginTop="1rem"
+        marginBottom="1rem"
+      >
+        <Button colorScheme="blue" width="100%">
           Add Topic
         </Button>
-        <UnorderedList>
-          {topics.map((topic, index) => {
-            return (
-              <ListItem key={index}>
-                {topic.name}: {topic.understanding} %
-              </ListItem>
-            );
-          })}
-        </UnorderedList>
-      </Container>
-    </div>
+      </Link>
+      <h3 className="topic-header">TOPIC LIST: </h3>
+      <UnorderedList className="topic-list">
+        {topics.map((topic: CompactTopic, index: number) => {
+          return (
+            <ListItem key={index}>
+              <Link as={ReactLink} to={`/topics/${topic._id}`}>
+                <div className="topic-list-item">
+                  <span className="topic-name">{topic.name} : </span>{" "}
+                  <span className="understanding">
+                    {Math.ceil(topic.understanding)} %
+                  </span>
+                </div>
+              </Link>
+            </ListItem>
+          );
+        })}
+      </UnorderedList>
+    </Flex>
   );
 };
 
