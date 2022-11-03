@@ -1,14 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { useNavigate, Link as ReactLink } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
-import {
-  Container,
-  ListItem,
-  UnorderedList,
-  Button,
-  Link,
-  Flex,
-} from "@chakra-ui/react";
+import { ListItem, UnorderedList, Button, Link, Flex } from "@chakra-ui/react";
 import "./style.css";
 
 const Dashboard: React.FC = () => {

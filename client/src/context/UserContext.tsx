@@ -1,6 +1,7 @@
 import React, { useState, createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios, { AxiosResponse } from "axios";
+import { useToast } from "@chakra-ui/react";
 
 export const UserContext = createContext({});
 
@@ -17,13 +18,14 @@ export const UserProvider: React.FC<Props> = ({ children }) => {
 
   const navigate = useNavigate();
 
+  const toast = useToast();
+
   const Login = async (user: string) => {
     setUser(user);
     navigate("/dashboard");
   };
 
   const GetTopics = async () => {
-    console.log("Getting topics");
     if (!user) {
       navigate("/");
       return;
@@ -59,7 +61,13 @@ export const UserProvider: React.FC<Props> = ({ children }) => {
     if (response.status === 200) {
       navigate("/dashboard");
     } else {
-      console.error(response.data.error);
+      toast({
+        title: "Error",
+        description: response.data.error,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
     }
   };
 
@@ -75,18 +83,15 @@ export const UserProvider: React.FC<Props> = ({ children }) => {
     if (response.status === 200) {
       navigate("/dashboard");
     } else {
-      console.error(response.data.error);
+      toast({
+        title: "Error",
+        description: response.data.error,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
     }
   };
-
-  // const UpdateTopic = async (topic: Topic) => {
-  //   if (!user) {
-  //     navigate("/");
-  //     return;
-  //   }
-  //   const response: AxiosResponse = await axios.put(
-  //     `${baseUrl}/${user}/topic`,
-  // }
 
   return (
     <UserContext.Provider

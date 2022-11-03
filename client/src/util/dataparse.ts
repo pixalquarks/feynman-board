@@ -18,6 +18,7 @@ export const isDualDelimiter = (char: string): boolean => {
     return dualDelimiter.includes(char);
     };
 
+    // checks if the delimiters are in valid order
 const isValid = (text: string): boolean => {
     const stack: string[] = [];
     for (let i = 0; i < text.length; i++) {
@@ -38,6 +39,7 @@ const isValid = (text: string): boolean => {
     return stack.length === 0;
 };
 
+// checks if there is nested delimiters in the test
 const checkNested = (text: string): boolean => {
     let lastDelim = "";
     for (let i = 0; i < text.length; i++) {

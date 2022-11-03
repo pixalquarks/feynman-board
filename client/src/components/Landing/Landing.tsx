@@ -4,15 +4,15 @@ import { Container, Input, Button } from "@chakra-ui/react";
 import "./style.css";
 
 const Landing: React.FC = () => {
-  const { user, Login } = useContext(UserContext) as UserContextType;
+  const { Login } = useContext(UserContext) as UserContextType;
 
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const OnUsernameSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (inputRef.current === null) return;
-    console.log(inputRef.current.value);
-    Login(inputRef.current.value);
+    if (inputRef.current !== null) {
+      Login(inputRef.current.value);
+    }
   };
 
   return (

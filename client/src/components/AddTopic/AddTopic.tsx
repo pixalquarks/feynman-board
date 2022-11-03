@@ -40,7 +40,6 @@ const AddTopic: React.FC = () => {
   const toast = useToast();
 
   useEffect(() => {
-    console.log("topicId", topicId);
     if (topicId) {
       GetTopicById(topicId)
         .then((topic) => {
@@ -51,7 +50,13 @@ const AddTopic: React.FC = () => {
           }
         })
         .catch((err) => {
-          console.error(err);
+          toast({
+            title: "Error",
+            description: err.message,
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
         });
     }
   }, []);
@@ -76,7 +81,6 @@ const AddTopic: React.FC = () => {
         }
       }
       setBlocks(newBlocks);
-      console.log(newBlocks);
     } catch (err: any) {
       toast({
         title: "Error",
@@ -93,19 +97,20 @@ const AddTopic: React.FC = () => {
     setData(res);
   };
 
+  // It sets the top and left for context menu when a block is clicked.
   const onBlockClick = (
     e: React.MouseEvent<HTMLSpanElement, MouseEvent>,
     index: number
   ) => {
     const left = e.clientX + "px";
     const top = e.clientY + "px";
-    console.log(top, left);
     setTop(parseInt(top));
     setLeft(parseInt(left));
     setCurrentBlockIndex(index);
     setIsContextVisible(true);
   };
 
+  // It sets the understanding of the block when a context menu item is clicked.
   const onContextItemClck = (understanding: number) => {
     const newBlocks = [...blocks];
     newBlocks[currentBlockIndex].understanding = understanding;
@@ -116,7 +121,6 @@ const AddTopic: React.FC = () => {
 
   const onAddTopic = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(name, data);
     SplitData();
     const nTopic: Topic = {
       name,

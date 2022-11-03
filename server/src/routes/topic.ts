@@ -21,8 +21,6 @@ const calculateUnderstanding = (blocks: IBlock[]): number => {
 
 
 router.get('/:username/topic', async (req: Request, res: Response): Promise<Response> => {
-    console.log(req.body);
-    console.log(req.params);
     try {
     const user = await User.findOne({name: req.params.username});
     if (user === null) {
@@ -63,16 +61,12 @@ router.get('/:username/topic/:id', async (req: Request, res: Response): Promise<
 
 
 router.post("/:username/topic", async (req: Request, res: Response): Promise<Response> => {
-    console.log(req.body);
-    console.log(req.params);
     try {
     const user = await User.findOne({name: req.params.username});
     if (user === null) {
-        console.log("User undefined");
         const nUser = await User.create({name: req.params.username, topics: req.body});
         return res.status(200).json({"user": nUser});
     } else {
-        console.log("user defined ", user);
         await User.updateOne({name: req.params.username}, { $push: { topics: req.body}});
         return res.status(200).json({"message": "Topic added"});
     }
@@ -91,7 +85,6 @@ router.put("/:username/topic/:id", async (req: Request, res: Response): Promise<
                 "topics.$": req.body,
             }
         })
-        console.log(result);
         const nUser = await User.findOne({"name": req.params.username});
         return res.status(200).json({"user": nUser});
     } catch (e: any) {
