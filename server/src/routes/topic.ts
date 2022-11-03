@@ -5,10 +5,18 @@ const router = express.Router();
 
 const calculateUnderstanding = (blocks: IBlock[]): number => {
     let tU = 0;
+    let count = 0;
     for (let b of blocks) {
-        tU += b.understanding;
+        if (b.text.trim() !== "") {
+            tU += b.understanding;
+            count++;
+        }
+        
     }
-    return (tU / (blocks.length*4)) * 100;
+    if (count === 0) {
+        return 100;
+    }
+    return (tU / (count*4)) * 100;
 }
 
 
@@ -65,8 +73,8 @@ router.post("/:username/topic", async (req: Request, res: Response): Promise<Res
         return res.status(200).json({"user": nUser});
     } else {
         console.log("user defined ", user);
-        const nUser = await User.updateOne({name: req.params.username}, { $push: { topics: req.body}})
-        return res.status(200).json({"user": nUser});
+        await User.updateOne({name: req.params.username}, { $push: { topics: req.body}});
+        return res.status(200).json({"message": "Topic added"});
     }
 } catch (e: any) {
     return res.status(500).json({"error": e.message});
