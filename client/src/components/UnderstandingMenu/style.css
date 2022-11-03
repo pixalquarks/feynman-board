@@ -1,0 +1,38 @@
+.context-menu {
+  position: fixed;
+  z-index: 1000;
+  width: 150px;
+  background-color: #1b1a1a;
+  border-radius: 3px;
+}
+
+.context-item {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 15px;
+  color: #eee;
+}
+
+.seleted {
+  background-color: #5d3737;
+}
+
+.context-item:hover {
+  background-color: #514b4b;
+}
+
+.u1 {
+  background-color: rgba(238, 24, 24, 0.673);
+}
+
+.u2 {
+  background-color: blue;
+}
+
+.u3 {
+  background-color: rgba(196, 149, 21, 0.749);
+}
+
+.u4 {
+  background-color: green;
+}
